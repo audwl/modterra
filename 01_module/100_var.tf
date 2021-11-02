@@ -30,7 +30,7 @@ variable "cidr" {
 
 variable "cidr_v6" {
   type = string
-  default = "::0"
+  default = "::/0"
 }
 variable "cidr_main" {
   type = string
@@ -81,25 +81,30 @@ variable "mysql_port" {
 }
 variable "prot_tcp" {
   type = string
-  default = "tcp"
+  default = "TCP"
 }
 
 variable "prot_http" {
   type = string
-  default = "http"
+  default = "HTTP"
 }
 
 variable "prot_icmp" {
   type = string
-  default = "icmp"
+  default = "ICMP"
 }
 
 variable "prot_ssh" {
   type = string
-  default = "ssh"
+  default = "SSH"
 }
 
 variable "prot_mysql" {
   type = string
-  default = "mysql"
+  default = "MYSQL"
+}
+
+variable "name_db" {
+  type=string
+  default = "mydb"
 }
