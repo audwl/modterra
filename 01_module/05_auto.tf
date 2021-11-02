@@ -2,7 +2,7 @@ resource "aws_ami_from_instance" "mjkim_ami" {
   name                    = "mjkim-ami"
   source_instance_id      = aws_instance.mjkim_web.id
   depends_on = [
-    aws_instance.mjkim_weba
+    aws_instance.mjkim_web
   ]
 }
 resource "aws_launch_configuration" "mjkim_lacf" {
@@ -27,7 +27,7 @@ resource "aws_placement_group" "mjkim_pg" {
     strategy = "cluster"
 }
 resource "aws_autoscaling_group" "mjkim_atsg" {
-    name = "mjkim-atsg"
+    name = "mjkim_atsg"
     min_size = 2
     max_size = 8
     health_check_grace_period = 300
@@ -35,10 +35,9 @@ resource "aws_autoscaling_group" "mjkim_atsg" {
     desired_capacity = 2
     force_delete = true
     launch_configuration = aws_launch_configuration.mjkim_lacf.name
-    count = 2
-    vpc_zone_identifier = [aws_subnet.mjkim_pub[count.index].id]
+    vpc_zone_identifier   = [aws_subnet.mjkim_pub[0].id,aws_subnet.mjkim_pub[1].id]
 }
 resource "aws_autoscaling_attachment" "mjkim_atatt" {
   autoscaling_group_name = aws_autoscaling_group.mjkim_atsg.id
-  alb_target_group_arn   = aws_lb_target_group.mjkim_lbtg.arn
+  alb_target_group_arn = aws_lb_target_group.mjkim_lbtg.arn
 }
