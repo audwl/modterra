@@ -1,7 +1,9 @@
 module "stage" {
     source  =  "../01_module"
 
-    region  = "ap-northeast-1"
+    name = "mykim"
+    region  = "ap-northeast-3"
+    ami = "ami-026107638e7d599b1"
     cidr    = "0.0.0.0/0"
     cidr_main = "192.168.0.0/16"
     name = "mjkim"
@@ -16,10 +18,20 @@ module "stage" {
     ssh_port = 22
     http_port = 80
     mysql_port = 3306
-    prot_http = "http"
-    prot_icmp = "icmp"
-    prot_tcp = "tcp"
-    prot_ssh = "ssh"
-    prot_mysql = "mysql"
-    instance = "t2.micro"
+    prot_http = "HTTP"
+    prot_icmp = "ICMP"
+    prot_tcp = "TCP"
+    prot_ssh = "SSH"
+    prot_mysql = "MYSQL"
+    instance = "t3.micro"
+    load_type            =  "application"
+    strategy             =  "cluster"
+    storage_size         =  20
+    storage_type         =  "gp2"
+    mysql_version        =  "8.0"
+    sql_engine           =  "mysql"
+    username             =  "admin"
+    password             =  "It12345!"
+    name_db              =  "mydb"
+    instance_db          =  "db.t2.micro"
 }
