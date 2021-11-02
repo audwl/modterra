@@ -25,7 +25,7 @@ resource "aws_subnet" "mjkim_pub" {
     }
   
 }
-#가용영역 a의 Private Subnet
+
 resource "aws_subnet" "mjkim_pri" {
     vpc_id = aws_vpc.mjkim_vpc.id
     count = "${length(var.private_s)}"
