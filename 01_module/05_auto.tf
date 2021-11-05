@@ -1,17 +1,20 @@
 resource "aws_ami_from_instance" "mjkim_ami" {
-  name                    = "mjkim-ami"
+  name                    = "${var.name}-ami"
   source_instance_id      = aws_instance.mjkim_web.id
   depends_on = [
     aws_instance.mjkim_web
   ]
+    lifecycle {
+    create_before_destroy = true
+  }
 }
 resource "aws_launch_configuration" "mjkim_lacf" {
-    name = "mjkim-web"
+    name = "${var.name}-web"
     image_id =  aws_ami_from_instance.mjkim_ami.id
     instance_type = var.instance
     iam_instance_profile = "admin-role"
     security_groups = [aws_security_group.mjkim_websg.id]
-    key_name = "tf-key"
+    key_name = var.key
     user_data = <<-EOF
                 #!/bin/bash
                 systemctl start httpd
@@ -23,11 +26,11 @@ resource "aws_launch_configuration" "mjkim_lacf" {
   }
 }
 resource "aws_placement_group" "mjkim_pg" {
-    name = "mjkim-pg"
-    strategy = "cluster"
+    name = "${var.name}-pg"
+    strategy = var.strategy
 }
 resource "aws_autoscaling_group" "mjkim_atsg" {
-    name = "mjkim_atsg"
+    name = "${var.name}_atsg"
     min_size = 2
     max_size = 8
     health_check_grace_period = 300
