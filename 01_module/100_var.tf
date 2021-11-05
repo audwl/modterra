@@ -83,6 +83,9 @@ variable "prot_tcp" {
   type = string
   default = "TCP"
 }
+variable "prot_udp" {
+  type = string
+  default = "UDP"
 
 variable "prot_http" {
   type = string
@@ -113,4 +116,49 @@ variable "ami" {
   type = string
   default = "ami-0e4a9ad2eb120e054" 
   
+}
+  variable "load_type" {
+  type  = string
+#  default = "application"
+}
+
+variable "strategy" {
+  type  = string
+#  default = "cluster"
+}
+
+variable "storage_size" {
+  type = number
+#  default = 20
+}
+
+variable "storage_type" {
+  type = string
+#  default = gp2
+}
+
+variable "mysql_version" {
+  type = string
+#  default = "8.0"
+}
+
+variable "username" {
+  type = string
+#  default = "admin"
+}
+
+variable "password" {
+  type = string
+#  default = "It12345!"
+}
+
+
+variable "instance_db" {
+  type  = string
+#  default = "db.t2.micro"
+}
+
+variable "endpoint" {
+  type  = string
+  default = "data.aws_db_instance.mydb.endpoint"
 }
