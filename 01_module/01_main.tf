@@ -79,3 +79,12 @@ resource "aws_route_table_association" "mjkim_rtas_a" {
     subnet_id = aws_subnet.mjkim_pub[count.index].id
     route_table_id = aws_route_table.mjkim_rt.id
 }
+output "public_ip" {
+  description = "Web EC2 Instance Public_IP Print"
+  value       = aws_instance.mjkim_web.public_ip
+}
+
+output "load_dns" {
+  description = "Load Balancer Domain Name"
+  value       = aws_lb.mjkim_lb.dns_name
+}
