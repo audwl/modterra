@@ -86,7 +86,7 @@ data "aws_ami" "amzn" {
 }
 
 resource "aws_instance" "mjkim_web" {
-  ami                    = "ami-0e4a9ad2eb120e054"                             #data.aws_ami.amzn.id
+  ami                    = data.aws_ami.amzn.id                          #ami-0e4a9ad2eb120e054
   instance_type          = var.instance
   key_name               = var.key
   vpc_security_group_ids = [aws_security_group.mjkim_websg.id]
