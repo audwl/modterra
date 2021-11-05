@@ -1,9 +1,8 @@
 resource "aws_lb" "mjkim_lb" {
-    name = "mjkim-alb"
+    name = "${var.name}-alb"
     internal = false
-    load_balancer_type = "application"
+    load_balancer_type = var.loac_type
     security_groups = [aws_security_group.mjkim_websg.id]
-    count = "${length(var.avazone)}"
     subnets = [aws_subnet.mjkim_pub[0].id, aws_subnet.mjkim_pub[1].id]
     
     tags= {
