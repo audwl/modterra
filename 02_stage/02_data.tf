@@ -21,6 +21,7 @@ module "stage" {
     prot_http = "HTTP"
     prot_icmp = "ICMP"
     prot_tcp = "TCP"
+    prot_udp = "UDP"
     prot_ssh = "SSH"
     prot_mysql = "MYSQL"
     instance = "t3.micro"
